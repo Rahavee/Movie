@@ -4,32 +4,44 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {FlatList, ScrollView, StyleSheet, Button, Text, View} from 'react-native';
 
 const Stack = createStackNavigator();
+const movies = [
+    {name: "Spartacus", genre: "Action, Thriller", desc: "The show follows the life of a  gladiator in rome"},
+    {name: "The Expanse", genre: "Sci-fi", desc: "It is a space detective show"},
+    {name: "Mr.Robot", genre: "Technology", desc: "It follows a guy who wants to be a hacker"},
+    {name: "Money Heist", genre: "Action, Thriller", desc: "Rob a bank"},
+    {name: "300", genre: "Action, History", desc: "Gladiator in Rome"},
+    {name: "You", genre: "Drama", desc: "A crazy person follows his crush"}
+];
 
 
 function Home({navigation}) {
     return (
         <ScrollView style={styles.container}>
             <FlatList
-                data={[
-                    "Spartacus", "The Expanse", "Mr.Robot", "Money Heist", "300", "You"
-                ]}
+                data={movies}
                 renderItem={({item}) =>
                     <Button style={styles.item}
-                    onPress={()=>navigation.navigate("Details")}
-                    title={item}>
-                </Button>}
+                            onPress={
+                                () => navigation.navigate("Details", {item})
+                            }
+                            title={item.name}>
+                    </Button>}
             />
 
         </ScrollView>
     );
 }
 
-function Details() {
+function Details({route, navigation}) {
+    const {item} = route.params;
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Home Screen</Text>
+        <View
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center', fontSize: 18, height: 44, color: "black"}}>
+            <Text>{item.name}</Text>
+            <Text>Genre: {item.genre}</Text>
+            <Text>Description: {item.desc}</Text>
         </View>
-    )
+    );
 }
 
 export default function App() {

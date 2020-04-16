@@ -43,4 +43,8 @@ target 'Movies' do
 
   # react-native-cli autolinking
   use_native_modules!
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
 end
